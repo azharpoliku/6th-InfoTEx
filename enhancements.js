@@ -2,6 +2,7 @@ const departments = ['Pengurusan','Jabatan Kejuruteraan Awam','Jabatan Kejuruter
 const mapsUrl = 'https://maps.app.goo.gl/oiZ6mvZwu7RBYft28';
 document.title = '6th INFOTEX | RSVP';
 document.querySelectorAll('body *').forEach(element => { if (element.children.length === 0 && element.textContent.includes('INFOTEX 2026')) element.textContent = element.textContent.replaceAll('INFOTEX 2026', '6th INFOTEX'); });
+document.querySelectorAll('[alt],[title],[aria-label]').forEach(element => ['alt','title','aria-label'].forEach(attribute => { const value = element.getAttribute(attribute); if (value?.includes('INFOTEX 2026')) element.setAttribute(attribute, value.replaceAll('INFOTEX 2026', '6th INFOTEX')); }));
 const mapsLink = document.querySelector('#lokasi a[target="_blank"]');
 const mapsFrame = document.querySelector('#lokasi iframe');
 if (mapsLink) mapsLink.href = mapsUrl;
