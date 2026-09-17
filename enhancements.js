@@ -1,12 +1,18 @@
 const departments = ['Pengurusan','Jabatan Kejuruteraan Awam','Jabatan Kejuruteraan Mekanikal','Jabatan Kejuruteraan Petrokimia','Jabatan Kejuruteraan Elektrik','Jabatan Teknologi Maklumat & Komunikasi','Jabatan Perdagangan','Jabatan Matematik Sains & Komputer','Jabatan Pengajian Am'];
 const mapsUrl = 'https://maps.app.goo.gl/oiZ6mvZwu7RBYft28';
+const mapEmbedUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.2044650823113!2d110.19255957584667!3d1.6297012606105936!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31fb046717ef2c0b%3A0xebffa18850af01eb!2sKuching%20Polytechnic!5e0!3m2!1sen!2smy!4v1789616679412!5m2!1sen!2smy';
 document.title = '6th INFOTEX | RSVP';
+const heroTitle = document.querySelector('.hero h1 span');
+const heroNumber = document.querySelector('.hero h1 em');
+if (heroTitle) heroTitle.textContent = '6th INFOTEX';
+if (heroNumber) heroNumber.style.display = 'none';
 document.querySelectorAll('body *').forEach(element => { if (element.children.length === 0 && element.textContent.includes('INFOTEX 2026')) element.textContent = element.textContent.replaceAll('INFOTEX 2026', '6th INFOTEX'); });
 document.querySelectorAll('[alt],[title],[aria-label]').forEach(element => ['alt','title','aria-label'].forEach(attribute => { const value = element.getAttribute(attribute); if (value?.includes('INFOTEX 2026')) element.setAttribute(attribute, value.replaceAll('INFOTEX 2026', '6th INFOTEX')); }));
 const mapsLink = document.querySelector('#lokasi a[target="_blank"]');
 const mapsFrame = document.querySelector('#lokasi iframe');
 if (mapsLink) mapsLink.href = mapsUrl;
 if (mapsFrame) mapsFrame.src = `https://www.google.com/maps?q=${encodeURIComponent(mapsUrl)}&output=embed`;
+if (mapsFrame) mapsFrame.src = mapEmbedUrl;
 const orgInput = document.querySelector('#rsvpForm input[name="org"]');
 const emailInput = document.querySelector('#rsvpForm input[name="email"]');
 if (emailInput) { emailInput.pattern='^[^\\s@]+@poliku\\.edu\\.my$'; emailInput.title='Sila gunakan emel rasmi @poliku.edu.my'; }
