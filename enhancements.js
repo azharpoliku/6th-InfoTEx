@@ -1,5 +1,19 @@
 const departments = ['Pengurusan','Jabatan Kejuruteraan Awam','Jabatan Kejuruteraan Mekanikal','Jabatan Kejuruteraan Petrokimia','Jabatan Kejuruteraan Elektrik','Jabatan Teknologi Maklumat & Komunikasi','Jabatan Perdagangan','Jabatan Matematik Sains & Komputer','Jabatan Pengajian Am'];
 const mapsUrl = 'https://maps.app.goo.gl/oiZ6mvZwu7RBYft28';
+const ecardMarkup = `<div class="ecard-overlay" id="ecardOverlay" role="dialog" aria-modal="true" aria-labelledby="ecardTitle"><div class="ecard"><div class="ecard-inner"><p class="ecard-kicker">JEMPUTAN</p><h2 id="ecardTitle">6th INFORMATION TECHNOLOGY <span>INNOVATION EXPO</span></h2><div class="ecard-event">6th INFOTEX<small>29 SEPTEMBER 2026<br>DEWAN JUBLI PERAK<br>POLITEKNIK KUCHING SARAWAK</small></div><p class="ecard-copy">“Anda dijemput untuk bersama-sama memeriahkan 6th INFOTEX.”</p><div class="ecard-actions"><button class="button primary ecard-close" type="button">Tutup &amp; Lihat Laman Web →</button><button class="ecard-music" type="button" aria-pressed="false">♪ Mainkan Muzik</button></div><div class="ecard-mark">6</div></div></div></div>`;
+document.body.insertAdjacentHTML('afterbegin', ecardMarkup);
+const ecardOverlay = document.getElementById('ecardOverlay');
+const ecardClose = ecardOverlay.querySelector('.ecard-close');
+const ecardMusic = ecardOverlay.querySelector('.ecard-music');
+let ambientContext;
+let ambientNodes = [];
+const audioMuted = localStorage.getItem('infotex-audio-muted') === 'true';
+const startAmbient = () => { if (audioMuted || ambientContext) return; ambientContext = new (window.AudioContext || window.webkitAudioContext)(); const master=ambientContext.createGain(); master.gain.value=.055; master.connect(ambientContext.destination); [110,164.81,220].forEach((frequency,index)=>{const oscillator=ambientContext.createOscillator();const gain=ambientContext.createGain();oscillator.type=index===1?'sine':'triangle';oscillator.frequency.value=frequency;gain.gain.value=index===0?.45:.18;oscillator.connect(gain);gain.connect(master);oscillator.start();ambientNodes.push(oscillator,gain)}); ecardMusic.textContent='♪ Muzik dimainkan'; ecardMusic.classList.add('is-playing'); ecardMusic.setAttribute('aria-pressed','true'); };
+const stopAmbient = () => { if (!ambientContext) return; const context=ambientContext; const now=context.currentTime; const master=context.destination; ambientNodes.filter(node=>node.gain).forEach(node=>{node.gain.cancelScheduledValues(now);node.gain.setTargetAtTime(0,now,.8)}); setTimeout(()=>{ambientNodes.filter(node=>node.stop).forEach(node=>node.stop());context.close();ambientNodes=[];ambientContext=null},850); };
+const closeEcard = () => { sessionStorage.setItem('infotex-ecard-seen','true'); stopAmbient(); ecardOverlay.classList.remove('is-open'); setTimeout(()=>ecardOverlay.remove(),650); };
+ecardMusic.addEventListener('click',()=>{if(ambientContext){stopAmbient();ecardMusic.textContent='♪ Mainkan Muzik';ecardMusic.classList.remove('is-playing');ecardMusic.setAttribute('aria-pressed','false');localStorage.setItem('infotex-audio-muted','true');}else{localStorage.setItem('infotex-audio-muted','false');startAmbient();}});
+ecardClose.addEventListener('click',closeEcard); document.addEventListener('keydown',event=>{if(event.key==='Escape'&&ecardOverlay.classList.contains('is-open'))closeEcard();});
+if(sessionStorage.getItem('infotex-ecard-seen')!=='true'){requestAnimationFrame(()=>ecardOverlay.classList.add('is-open'));}else{ecardOverlay.remove();}
 const mapEmbedUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.2044650823113!2d110.19255957584667!3d1.6297012606105936!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31fb046717ef2c0b%3A0xebffa18850af01eb!2sKuching%20Polytechnic!5e0!3m2!1sen!2smy!4v1789616679412!5m2!1sen!2smy';
 document.title = '6th INFOTEX | RSVP';
 const heroTitle = document.querySelector('.hero h1 span');
