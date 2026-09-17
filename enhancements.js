@@ -22,6 +22,7 @@ const startLuxuryLounge=()=>{if(audioMuted||loungeContext)return; loungeContext=
 const stopLuxuryLounge=()=>{if(!loungeContext)return;clearInterval(loungeTimer);const context=loungeContext;const master=loungeMaster;master.gain.setTargetAtTime(0,context.currentTime,.8);setTimeout(()=>context.close(),900);loungeContext=null;loungeMaster=null;loungeTimer=null;};
 ecardMusic.addEventListener('click',event=>{event.stopImmediatePropagation();if(loungeContext){stopLuxuryLounge();ecardMusic.textContent='♪ Mainkan Muzik';ecardMusic.classList.remove('is-playing');ecardMusic.setAttribute('aria-pressed','false');localStorage.setItem('infotex-audio-muted','true');}else{localStorage.setItem('infotex-audio-muted','false');startLuxuryLounge();}},true);
 ecardClose.addEventListener('click',()=>stopLuxuryLounge(),true);
+ecardMusic.remove();
 const mapEmbedUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.2044650823113!2d110.19255957584667!3d1.6297012606105936!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31fb046717ef2c0b%3A0xebffa18850af01eb!2sKuching%20Polytechnic!5e0!3m2!1sen!2smy!4v1789616679412!5m2!1sen!2smy';
 document.title = '6th INFOTEX | RSVP';
 const heroTitle = document.querySelector('.hero h1 span');
