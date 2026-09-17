@@ -1,0 +1,12 @@
+const departments = ['Pengurusan','Jabatan Kejuruteraan Awam','Jabatan Kejuruteraan Mekanikal','Jabatan Kejuruteraan Petrokimia','Jabatan Kejuruteraan Elektrik','Jabatan Teknologi Maklumat & Komunikasi','Jabatan Perdagangan','Jabatan Matematik Sains & Komputer','Jabatan Pengajian Am'];
+const orgInput = document.querySelector('#rsvpForm input[name="org"]');
+const emailInput = document.querySelector('#rsvpForm input[name="email"]');
+if (emailInput) { emailInput.pattern='^[^\\s@]+@poliku\\.edu\\.my$'; emailInput.title='Sila gunakan emel rasmi @poliku.edu.my'; }
+if (orgInput) { const select = document.createElement('select'); select.name='org'; select.required=true; select.innerHTML='<option value="">Pilih jabatan / unit</option>'+departments.map(value=>`<option>${value}</option>`).join(''); orgInput.replaceWith(select); }
+document.querySelector('#rsvpForm input[name="guests"]')?.closest('label')?.remove();
+
+const about = document.querySelector('#tentang');
+if (about) {
+  about.insertAdjacentHTML('beforebegin', `<section class="categories wrap"><div class="section-label">02 / KATEGORI PERTANDINGAN</div><div class="split-title"><h2>IDEA YANG<br><span>BERGERAK</span></h2><p>Tiga kategori utama untuk mengetengahkan solusi teknologi pelajar.</p></div><div class="category-grid"><article><span>01</span><h3>Internet<br>of Things</h3><p>Peranti terhubung, automasi dan penyelesaian pintar.</p></article><article><span>02</span><h3>Web<br>Solution</h3><p>Platform digital yang menyelesaikan masalah sebenar.</p></article><article><span>03</span><h3>Mobile<br>Application</h3><p>Aplikasi mudah alih yang praktikal dan berimpak.</p></article></div></section><section class="student-programs wrap"><div class="section-label">03 / PROGRAM PELAJAR</div><div class="program-grid"><article><div><small>ENTREPRENEURSHIP SHOWCASE</small><h3>DigiTechPreneur<br>2026</h3><p>28–29 September 2026<br>8:00 pagi – 5:00 petang<br>Dewan Jubli Perak</p></div><b>01</b></article><article><div><small>EXPERT TRAINING SESSION</small><h3>AI-Marketeer:<br>From Idea to Impact</h3><p>29 September 2026<br>8:30 – 11:30 pagi<br>Dewan Jubli Perak<br>Trainer: PC Image Sdn Bhd</p></div><b>02</b></article></div></section>`);
+}
+[['#tentang .section-label','04 / TENTANG INFOTEX'],['#aturcara .section-label','05 / ATUR CARA MAJLIS PENUTUPAN'],['.countdown .section-label','06 / COUNTDOWN'],['#rsvp .section-label','07 / RSVP'],['#lokasi .section-label','08 / LOKASI']].forEach(([selector,text])=>{const element=document.querySelector(selector);if(element)element.textContent=text;});
