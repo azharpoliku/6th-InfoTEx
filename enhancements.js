@@ -22,6 +22,12 @@ document.querySelector('#rsvpForm input[name="guests"]')?.closest('label')?.remo
 const about = document.querySelector('#tentang');
 const overview = document.querySelector('.overview');
 if (overview && !overview.querySelector('.split-title h2')) overview.querySelector('.split-title')?.replaceChildren(Object.assign(document.createElement('h2'), { innerHTML: '6th INFOTEX<br><span>DALAM SATU PANDANGAN</span>' }), Object.assign(document.createElement('p'), { textContent: 'Satu hari untuk meraikan kreativiti, teknologi dan pencapaian warga JTMK.' }));
+const overviewTitle = document.querySelector('.overview .split-title h2');
+if (overviewTitle) overviewTitle.innerHTML = '6TH INFOTEX<br><span>INFO AM</span>';
+const categoryTitle = document.querySelector('.categories .split-title h2');
+if (categoryTitle) categoryTitle.innerHTML = 'TIGA<br><span>KATEGORI UTAMA</span>';
+const scheduleIntro = document.querySelector('#aturcara .schedule-head p');
+if (scheduleIntro) scheduleIntro.innerHTML = 'Tentatif majlis penutupan<br>6TH INFOTEX';
 if (about) {
   about.insertAdjacentHTML('beforebegin', `<section class="categories wrap"><div class="section-label">02 / KATEGORI PERTANDINGAN</div><div class="split-title"><h2>IDEA YANG<br><span>BERGERAK</span></h2><p>Tiga kategori utama untuk mengetengahkan solusi teknologi pelajar.</p></div><div class="category-grid"><article><span>01</span><h3>Internet<br>of Things</h3><p>Peranti terhubung, automasi dan penyelesaian pintar.</p></article><article><span>02</span><h3>Web<br>Solution</h3><p>Platform digital yang menyelesaikan masalah sebenar.</p></article><article><span>03</span><h3>Mobile<br>Application</h3><p>Aplikasi mudah alih yang praktikal dan berimpak.</p></article></div></section><section class="student-programs wrap"><div class="section-label">03 / PROGRAM PELAJAR</div><div class="program-grid"><article><div><small>ENTREPRENEURSHIP SHOWCASE</small><h3>DigiTechPreneur<br>2026</h3><p>28–29 September 2026<br>8:00 pagi – 5:00 petang<br>Dewan Jubli Perak</p></div><b>01</b></article><article><div><small>EXPERT TRAINING SESSION</small><h3>AI-Marketeer:<br>From Idea to Impact</h3><p>29 September 2026<br>8:30 – 11:30 pagi<br>Dewan Jubli Perak<br>Trainer: PC Image Sdn Bhd</p></div><b>02</b></article></div></section>`);
 }
