@@ -1,4 +1,9 @@
 const departments = ['Pengurusan','Jabatan Kejuruteraan Awam','Jabatan Kejuruteraan Mekanikal','Jabatan Kejuruteraan Petrokimia','Jabatan Kejuruteraan Elektrik','Jabatan Teknologi Maklumat & Komunikasi','Jabatan Perdagangan','Jabatan Matematik Sains & Komputer','Jabatan Pengajian Am'];
+const mapsUrl = 'https://maps.app.goo.gl/oiZ6mvZwu7RBYft28';
+const mapsLink = document.querySelector('#lokasi a[target="_blank"]');
+const mapsFrame = document.querySelector('#lokasi iframe');
+if (mapsLink) mapsLink.href = mapsUrl;
+if (mapsFrame) mapsFrame.src = `https://www.google.com/maps?q=${encodeURIComponent(mapsUrl)}&output=embed`;
 const orgInput = document.querySelector('#rsvpForm input[name="org"]');
 const emailInput = document.querySelector('#rsvpForm input[name="email"]');
 if (emailInput) { emailInput.pattern='^[^\\s@]+@poliku\\.edu\\.my$'; emailInput.title='Sila gunakan emel rasmi @poliku.edu.my'; }
