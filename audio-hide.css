@@ -1,1 +1,2 @@
 .ecard-music{display:none!important}
+.ecard-overlay:not(.is-open) .ecard{transform:scale(.96);opacity:0;filter:blur(8px)}
